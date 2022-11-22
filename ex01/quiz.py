@@ -1,5 +1,5 @@
 from random import randint
-from datetime import time
+import time
 
 def shutudai():
     #quiz_ans
@@ -18,4 +18,7 @@ def kaitou(quiz_ans):
     print("正解！！！" if ans in quiz_ans else "出直してこい")
 
 if __name__ == "__main__":
+    start_time = time.time()
     kaitou(shutudai())
+    end_time = time.time()
+    print(f"所要時間は{end_time-start_time}です。")
