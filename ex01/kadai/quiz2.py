@@ -26,6 +26,8 @@ def make_quiz():
         kesson = hyouzi_string.pop(randint(0, len(hyouzi_string)-1))
         kesson_string.append(kesson)
 
+
+    print()
     print("対象文字：")
     print(" ".join(taisyou_string))
     #問題解答(デバッグ用)
