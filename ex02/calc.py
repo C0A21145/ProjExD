@@ -34,6 +34,22 @@ def text_box():
     entry.grid(row=0, column=0, columnspan=3)
 
 
+def show_symbol_btn():
+    buttons = tk.Button(root,
+                        text=f"+",
+                        width=4, height=2,
+                        font=("", 30))
+    buttons.grid(row=4, column=1)
+    buttons.bind("<1>", button_click)
+
+    buttons = tk.Button(root,
+                        text=f"=",
+                        width=4, height=2,
+                        font=("", 30))
+    buttons.grid(row=4, column=2)
+    buttons.bind("<1>", button_click)
+
+
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("tk_calculator")
@@ -41,5 +57,6 @@ if __name__ == "__main__":
 
     text_box()
     show_num_btn()
+    show_symbol_btn()
 
     root.mainloop()
