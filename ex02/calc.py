@@ -1,6 +1,5 @@
 import tkinter as tk
 import tkinter.messagebox as tkm
-import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image, ImageTk
 
