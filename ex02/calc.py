@@ -2,13 +2,15 @@ import tkinter as tk
 import tkinter.messagebox as tkm
 import numpy as np
 import matplotlib.pyplot as plt
+from PIL import Image, ImageTk
 
+global image
 # ----------------------------------------------------------------
 # ボタンが押された際に呼び出される関数
 
 
 def button_click(event):
-    global count
+    global count, image
     btn = event.widget
     txt = btn["text"]
 
@@ -22,12 +24,17 @@ def button_click(event):
 
     elif txt == "Graph":
         imgfilePath = calc_graph(entry.get())
+        #imgfilePath = "./ex02/graph2.png"
         # print(imgfilePath)
-        image = tk.PhotoImage(file=imgfilePath)
+        image = Image.open(imgfilePath)
+        image = ImageTk.PhotoImage(image=image)
+        #image = image.subsample(6)
+        # print(image)
         canvas = tk.Canvas(width=300, height=300)
-        canvas.create_image(0, 0, image=image)
-        canvas.place(x=100, y=100)
-        #canvas.grid(row=1, column=5, columnspan=4, rowspan=4)
+        #canvas.place(x=0, y=0)
+
+        canvas.create_image(150, 150, image=image)
+        canvas.grid(row=1, column=6, columnspan=4, rowspan=4)
         # print(canvas)
 
     elif txt == "=" or txt == "x" or txt == "y":
@@ -170,8 +177,8 @@ def calc_graph(siki):
             break
 
     # デバッグ用
-    print(f"katamuki {katamuki}")
-    print(f"seppen {seppen}")
+    #print(f"katamuki {katamuki}")
+    #print(f"seppen {seppen}")
 
     katamuki = int(katamuki)
 
@@ -186,10 +193,11 @@ def calc_graph(siki):
     # except:
     #   y = [i*katamuki for i in range(-10, 11, 1)]
     y = [i*katamuki for i in range(-10, 11, 1)]
-    print(x)
-    print(y)
+    # print(x)
+    # print(y)
 
     plt.figure(figsize=(3, 3))
+    plt.grid()
     plt.plot(x, y, label=graph_label)
     plt.savefig(filepath)
 
