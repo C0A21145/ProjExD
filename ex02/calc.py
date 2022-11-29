@@ -6,6 +6,12 @@ root.title("tk_calculator")
 root.geometry("300x500")
 
 
+def button_click(event):
+    btn = event.widget
+    txt = btn["text"]
+    tkm.showinfo(txt, f"{txt}のボタンが押されました")
+
+
 def show_btn():
     buttons = [0 for _ in range(10)]
     r, c = 0, 0
