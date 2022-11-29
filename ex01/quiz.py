@@ -21,4 +21,4 @@ if __name__ == "__main__":
     start_time = time.time()
     kaitou(shutudai())
     end_time = time.time()
-    print(f"所要時間は{end_time-start_time}です。")
+    print(f"所要時間は{(end_time-start_time):.2f}です。")
