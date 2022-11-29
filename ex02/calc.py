@@ -5,7 +5,8 @@ import tkinter.messagebox as tkm
 def button_click(event):
     btn = event.widget
     txt = btn["text"]
-    tkm.showinfo(txt, f"{txt}のボタンが押されました")
+    #tkm.showinfo(txt, f"{txt}のボタンが押されました")
+    entry.insert(tk.END, txt)
 
 
 def show_num_btn():
@@ -24,14 +25,6 @@ def show_num_btn():
         if c % 3 == 0:
             r += 1
             c = 0
-
-
-def text_box():
-    entry = tk.Entry(root,
-                     justify="right",
-                     width=10,
-                     font=("", 40))
-    entry.grid(row=0, column=0, columnspan=3)
 
 
 def show_symbol_btn():
@@ -54,6 +47,13 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.title("tk_calculator")
     root.geometry("300x500")
+
+    # text Box
+    entry = tk.Entry(root,
+                     justify="right",
+                     width=10,
+                     font=("", 40))
+    entry.grid(row=0, column=0, columnspan=3)
 
     text_box()
     show_num_btn()
