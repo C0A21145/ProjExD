@@ -1,10 +1,6 @@
 import tkinter as tk
 import tkinter.messagebox as tkm
 
-root = tk.Tk()
-root.title("tk_calculator")
-root.geometry("300x500")
-
 
 def button_click(event):
     btn = event.widget
@@ -12,9 +8,9 @@ def button_click(event):
     tkm.showinfo(txt, f"{txt}のボタンが押されました")
 
 
-def show_btn():
+def show_num_btn():
     buttons = [0 for _ in range(10)]
-    r, c = 0, 0
+    r, c = 1, 0
     for i in range(10):
         buttons[i] = tk.Button(root,
                                text=f"{abs(9-i)}",
@@ -30,6 +26,20 @@ def show_btn():
             c = 0
 
 
-show_btn()
+def text_box():
+    entry = tk.Entry(root,
+                     justify="right",
+                     width=10,
+                     font=("", 40))
+    entry.grid(row=0, column=0, columnspan=3)
 
-root.mainloop()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.title("tk_calculator")
+    root.geometry("300x500")
+
+    text_box()
+    show_num_btn()
+
+    root.mainloop()

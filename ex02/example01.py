@@ -27,17 +27,3 @@ entry.insert(tk.END, "fuhapiyo")
 entry.pack()
 
 root.mainloop()
-
-
-def button_click(event):
-    btn = event.widget
-    txt = btn["text"]
-    tkm.showinfo(txt, f"[{txt}]のボタンが押されました")
-
-
-def show_btn():
-    buttons = []
-    for i in range(10):
-        buttons.append(tk.Button(root, text=i))
-        buttons[i].bind("<1>", button_click(i))
-        buttons[i].grid(row=)
