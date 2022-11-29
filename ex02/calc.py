@@ -22,23 +22,24 @@ def button_click(event):
     elif txt == "AC":
         entry.delete(0, tk.END)
 
+    # 画像の表示
     elif txt == "Graph":
         imgfilePath = calc_graph(entry.get())
-        #imgfilePath = "./ex02/graph2.png"
-        # print(imgfilePath)
         image = Image.open(imgfilePath)
         image = ImageTk.PhotoImage(image=image)
-        #image = image.subsample(6)
-        # print(image)
         canvas = tk.Canvas(width=300, height=300)
-        #canvas.place(x=0, y=0)
 
         canvas.create_image(150, 150, image=image)
         canvas.grid(row=1, column=6, columnspan=4, rowspan=4)
-        # print(canvas)
 
-    elif txt == "=" or txt == "x" or txt == "y":
+    elif txt == "x" or txt == "y":
         entry.insert(tk.END, txt)
+
+    elif txt == "=":
+        if "=" in entry.get():
+            pass
+        else:
+            entry.insert(tk.END, txt)
 
     else:
         try:
