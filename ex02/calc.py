@@ -58,7 +58,7 @@ def button_click(event):
 
 def show_num_btn():
     buttons = [0 for _ in range(10)]
-    r, c = 1, 1
+    r, c = 1, 0
     for i in range(10):
         buttons[i] = tk.Button(root,
                                text=f"{abs(9-i)}",
@@ -146,7 +146,7 @@ def show_symbol_btn():
                         text=f"AC",
                         width=4, height=2,
                         font=("", 30))
-    buttons.grid(row=1, column=0)
+    buttons.grid(row=4, column=1)
     buttons.bind("<1>", button_click)
 
     # graph button
