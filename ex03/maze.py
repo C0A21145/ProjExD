@@ -1,8 +1,6 @@
 import tkinter as tk
 import maze_maker
 
-global cx, cy, key
-
 
 def key_down(event):
     global key
@@ -15,17 +13,17 @@ def key_up(event):
 
 
 def main_proc():
-    global cx, cy, key
+    global cx, cy, key, mx, my
 
     if key == "Up":
-        cy -= 20
+        my -= 1
     elif key == "Down":
-        cy += 20
+        my += 1
     elif key == "Left":
-        cx -= 20
+        mx -= 1
     elif key == "Right":
-        cx += 20
-    canvas.coords("kokaton", cx, cy)
+        mx += 1
+    canvas.coords("kokaton", mx*100+50, my*100+50)
     root.after(100, main_proc)
 
 
@@ -39,8 +37,9 @@ if __name__ == "__main__":
     maze_list = maze_maker.make_maze(15, 9)
     maze_maker.show_maze(canvas, maze_list)
 
-    cx = 300
-    cy = 400
+    mx, my = 1, 1
+    cx = 250
+    cy = 250
     photo = tk.PhotoImage(file="fig/0.png")
     canvas.create_image(cx, cy, image=photo, tag="kokaton")
 
