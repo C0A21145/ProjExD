@@ -1,4 +1,5 @@
 import tkinter as tk
+import maze_maker
 
 global cx, cy, key
 
@@ -34,6 +35,9 @@ if __name__ == "__main__":
 
     canvas = tk.Canvas(root, width=1500, height=900, bg="black")
     canvas.pack()
+
+    maze_list = maze_maker.make_maze(15, 9)
+    maze_maker.show_maze(canvas, maze_list)
 
     cx = 300
     cy = 400
