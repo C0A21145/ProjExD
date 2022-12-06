@@ -1,6 +1,6 @@
 # 第3回
 ## 迷えるこうかとん(ex03/maze.py)
-## 注意：make_mazeも変更しています！！
+## 注意：make_mazeも変更しています！！また、small_coin.pngをfigの中に入れてから実行してください。
 
 ### 画面に表示されているコインを制限時間内に全部取得してください!!
 ![image](https://user-images.githubusercontent.com/85730896/205853981-5063f8c4-b37c-4f09-b9e1-e4136ef783a0.PNG)
