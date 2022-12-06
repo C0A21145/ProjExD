@@ -14,6 +14,7 @@ def key_up(event):
 
 def main_proc():
     global cx, cy, key, mx, my
+    old_place = [mx, my]
 
     if key == "Up":
         my -= 1
@@ -23,6 +24,11 @@ def main_proc():
         mx -= 1
     elif key == "Right":
         mx += 1
+
+    if maze_list[mx][my] == 1:
+        mx = old_place[0]
+        my = old_place[1]
+
     canvas.coords("kokaton", mx*100+50, my*100+50)
     root.after(100, main_proc)
 
