@@ -4,7 +4,9 @@ global cx, cy
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.geometry("1500x900")
     root.title("Tkinter")
+
+    canvas = tk.Canvas(root, width=1500, height=900, bg="black")
+    canvas.pack()
 
     root.mainloop()
