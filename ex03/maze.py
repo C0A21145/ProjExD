@@ -32,7 +32,9 @@ def put_coin():
 
 def main_proc():
     global key, mx, my, time_limit, coin_limit, get_coin
+    # 現在の位置
     old_place = [mx, my]
+    # 操作可能0、操作不可能1
     flag = 0
 
     if key == "Up":
@@ -57,13 +59,17 @@ def main_proc():
 
     canvas.coords("kokaton", mx*50+25, my*50+25)
     time_limit -= 5
+
+    # 時間切れ、コインの取得枚数が配置されてる枚数と同じになったらflagを1にする
     if time_limit < 0 or get_coin >= coin_limit:
         flag = 1
     if flag == 0:
         root.after(100, main_proc)
+    # コイン枚数が上限に達したらゲームクリア表示
     elif get_coin >= coin_limit:
         if tkm.showinfo("おめでとう", "Game Clear") == "ok":
             root.destroy()
+    # 時間切れしたらゲームオーバー
     else:
         if tkm.showerror("残念", "Game Over") == "ok":
             root.destroy()
