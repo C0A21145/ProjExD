@@ -13,7 +13,7 @@ def key_up(event):
 
 
 def main_proc():
-    global cx, cy, key, mx, my
+    global key, mx, my
     old_place = [mx, my]
 
     if key == "Up":
@@ -29,30 +29,34 @@ def main_proc():
         mx = old_place[0]
         my = old_place[1]
 
-    canvas.coords("kokaton", mx*100+50, my*100+50)
+    canvas.coords("kokaton", mx*50+25, my*50+25)
     root.after(100, main_proc)
 
 
 if __name__ == "__main__":
+    # 初期位置設定
+    mx, my = 1, 1
+    # 押されているキー保管場所
+    key = ""
+
     root = tk.Tk()
     root.title("Tkinter")
-
     canvas = tk.Canvas(root, width=1500, height=900, bg="black")
     canvas.pack()
 
-    maze_list = maze_maker.make_maze(15, 9)
+    # 迷路リスト作成、描画
+    maze_list = maze_maker.make_maze(30, 18)
     maze_maker.show_maze(canvas, maze_list)
 
-    mx, my = 1, 1
-    cx = 250
-    cy = 250
-    photo = tk.PhotoImage(file="fig/0.png")
-    canvas.create_image(cx, cy, image=photo, tag="kokaton")
+    # こうかとん描画
+    photo = tk.PhotoImage(file="fig/small_0.png")
+    canvas.create_image(mx*50+25, my*50+25, image=photo, tag="kokaton")
 
-    key = ""
+    # 押されたボタンの取得
     root.bind("<KeyPress>", key_down)
     root.bind("<KeyRelease>", key_up)
 
+    # 動き実装関数
     main_proc()
 
     root.mainloop()
