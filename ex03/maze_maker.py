@@ -18,6 +18,10 @@ def make_maze(yoko, tate):
             else:
                 rnd = random.randint(0, 3)
             maze_lst[x+YP[rnd]][y+XP[rnd]] = 1
+    for i in range(4):
+        maze_lst[3+i*4][16] = 1
+        maze_lst[28][i*4] = 1
+
     return maze_lst
 
 
