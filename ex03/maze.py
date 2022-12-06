@@ -1,6 +1,17 @@
 import tkinter as tk
 
-global cx, cy
+global cx, cy, key
+
+
+def key_down(event):
+    global key
+    key = event.keysym
+
+
+def key_up(event):
+    global key
+    key = ""
+
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -11,8 +22,11 @@ if __name__ == "__main__":
 
     cx = 300
     cy = 400
-
     photo = tk.PhotoImage(file="fig/0.png")
     canvas.create_image(cx, cy, image=photo)
+
+    key = ""
+    root.bind("<KeyPress>", key_down)
+    root.bind("<KeyRelease>", key_up)
 
     root.mainloop()
