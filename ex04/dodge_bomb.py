@@ -149,7 +149,7 @@ def main():
                 screen = 2
 
             # GameOver判定
-            if tori_rct.colliderect(bomb_rct) or deadline < 0:
+            if tori_rct.colliderect(bomb_rct):
                 if item_status == 1:
                     vx *= -1
                     vy *= -1
@@ -177,7 +177,7 @@ def main():
             scrn_sfc.blit(gameclear_text, gameclear_text_rct)
 
         pg.display.update()
-        clock.tick(2000)
+        clock.tick(10000)
 
 
 # ----------------------------------------------------------------
