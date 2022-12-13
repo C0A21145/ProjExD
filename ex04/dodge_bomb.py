@@ -159,8 +159,9 @@ def main():
 
             # アイテム取得処理
             if tori_rct.colliderect(item_rct):
-                item_status = 1
-                item_count += 1
+                if item_num > item_count:
+                    item_status = 1
+                    item_count = 99
 
         # ゲームオーバー時間
         elif screen == 1:
