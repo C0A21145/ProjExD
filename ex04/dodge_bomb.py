@@ -22,6 +22,16 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
+            if event.type == pg.KEYDOWN:
+                key_status = pg.key.get_pressed()
+                if key_status[pg.K_UP]:
+                    tori_rct.centery -= 1
+                elif key_status[pg.K_DOWN]:
+                    tori_rct.centery += 1
+                elif key_status[pg.K_RIGHT]:
+                    tori_rct.centerx += 1
+                elif key_status[pg.K_LEFT]:
+                    tori_rct.centerx -= 1
 
         pg.display.update()
         clock.tick(1000)
