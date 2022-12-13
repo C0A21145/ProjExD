@@ -23,6 +23,7 @@ def main():
     bomb_rct = bomb_sfc.get_rect()
     bomb_rct.centerx = randint(10, scrn_width-10)
     bomb_rct.centery = randint(10, scrn_height-10)
+    vx, vy = 1, 1
 
     clock = pg.time.Clock()
 
@@ -33,19 +34,27 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
-            if event.type == pg.KEYDOWN:
-                key_status = pg.key.get_pressed()
-                if key_status[pg.K_UP]:
-                    tori_rct.centery -= 1
-                elif key_status[pg.K_DOWN]:
-                    tori_rct.centery += 1
-                elif key_status[pg.K_RIGHT]:
-                    tori_rct.centerx += 1
-                elif key_status[pg.K_LEFT]:
-                    tori_rct.centerx -= 1
+        if event.type == pg.KEYDOWN:
+            key_status = pg.key.get_pressed()
+            old_place = [tori_rct.centerx, tori_rct.centery]
+            if key_status[pg.K_UP]:
+                tori_rct.centery -= 1
+            elif key_status[pg.K_DOWN]:
+                tori_rct.centery += 1
+            elif key_status[pg.K_RIGHT]:
+                tori_rct.centerx += 1
+            elif key_status[pg.K_LEFT]:
+                tori_rct.centerx -= 1
+            if tori_rct.centerx < 0 or tori_rct.centerx > scrn_width or tori_rct.centery < 0 or tori_rct.centery > scrn_height:
+                tori_rct.centerx = old_place[0]
+                tori_rct.centery = old_place[1]
 
-        bomb_rct.centerx += 1
-        bomb_rct.centery += 1
+        bomb_rct.centerx += vx
+        bomb_rct.centery += vy
+        if bomb_rct.centerx < 0 or bomb_rct.centerx > scrn_width:
+            vx *= -1
+        if bomb_rct.centery < 0 or bomb_rct.centery > scrn_height:
+            vy *= -1
 
         pg.display.update()
         clock.tick(1000)
