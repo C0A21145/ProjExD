@@ -178,6 +178,7 @@ def main():
             scrn_sfc.blit(gameclear_text, gameclear_text_rct)
 
         pg.display.update()
+        
         clock.tick(10000)
 
 
