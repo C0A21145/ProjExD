@@ -56,6 +56,9 @@ def main():
         if bomb_rct.centery < 0 or bomb_rct.centery > scrn_height:
             vy *= -1
 
+        if tori_rct.colliderect(bomb_rct):
+            return
+
         pg.display.update()
         clock.tick(1000)
 
