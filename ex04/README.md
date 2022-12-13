@@ -1,5 +1,6 @@
 # 第四回
 ## 逃げろこうかとん(ex04/dodge_bomb.py)
+![概要](https://user-images.githubusercontent.com/85730896/207261444-2b8da8ba-020d-4256-a47e-2f31e3ac4e81.PNG)
 ## 必要モジュール
 - math
 - random
