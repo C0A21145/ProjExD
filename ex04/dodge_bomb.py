@@ -44,6 +44,9 @@ def main():
                 elif key_status[pg.K_LEFT]:
                     tori_rct.centerx -= 1
 
+        bomb_rct.centerx += 1
+        bomb_rct.centery += 1
+
         pg.display.update()
         clock.tick(1000)
 
