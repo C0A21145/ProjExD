@@ -1,7 +1,8 @@
 import pygame as pg
 import random
 import sys
-
+import time
+import math
 # ----------------------------------------------------------------
 guard_status = False
 
@@ -30,6 +31,7 @@ class Bird():
         self.sfc = pg.image.load(imgPath)
         self.sfc = pg.transform.rotozoom(self.sfc, 0, 2.0)
         self.rct = self.sfc.get_rect()
+        self.rct.center = firstXY
 
     def blit(self, scr: Screen):
         scr.sfc.blit(self.sfc, self.rct)
@@ -111,6 +113,42 @@ class Guard:
             self.blit(scr)
 
 
+class Monster:
+    def __init__(self, img, hp, position):
+        self.sfc = pg.image.load(img)
+        self.sfc = pg.transform.rotozoom(self.sfc, 0, 0.5)
+        self.rct = self.sfc.get_rect()
+        self.rct.center = position
+        self.vx, self.vy = 1, 0
+
+    def blit(self, scr: Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+
+    def update(self, scr: Screen):
+        self.rct.centerx += self.vx
+        if self.rct.centerx <= 0 or self.rct.centerx >= scr.rct.width:
+            self.vx *= -1
+        self.blit(scr)
+
+
+class Timer():
+    def __init__(self, deadline, scr: Screen):
+        self.sfc = scr.sfc
+        self.rct = self.sfc.get_rect()
+        self.time = time.time()
+        self.deadline = deadline
+        self.start_time = time.time()
+        self.font = pg.font.Font(None, 100)
+
+    def blit(self, scr: Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+
+    def update(self, scr: Screen):
+        deadline = self.deadline - (time.time() - self.start_time)
+        txt = self.font.render(str(math.floor(deadline)), True, (0, 0, 0))
+        self.sfc.blit(txt, (1500, 0))
+
+
 def check_bound(obj_rct, scr_rct):
     """
     第1引数：こうかとんrectまたは爆弾rect
@@ -134,6 +172,8 @@ def main():
     bkd2 = Bomb((255, 0, 0), 15, (+1, +1), scr)
     atk = Attack("fig/ball.png", 1)
     shield = Guard("fig/shield.png")
+    monster = Monster("fig/monster.png", 1, (500, 500))
+    timer = Timer(30, scr)
 
     clock = pg.time.Clock()
     while True:
@@ -154,6 +194,8 @@ def main():
         kkt.update(scr)
         atk.update(scr)
         shield.update(scr, kkt)
+        monster.update(scr)
+        timer.update(scr)
 
         bkd.update(scr)
         bkd2.update(scr)
