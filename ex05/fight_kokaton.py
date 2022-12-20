@@ -69,6 +69,25 @@ class Bomb():
         self.blit(scr)
 
 
+class Monster(pg.sprite.Sprite):
+    def __init__(self, img, hp, position):
+        pg.sprite.Sprite.__init__(self)
+        self.sfc = pg.image.load(img)
+        self.sfc = pg.transform.rotozoom(self.sfc, 0, 0.5)
+        self.rct = self.sfc.get_rect()
+        self.rct.center = position
+        self.vx, self.vy = 1, 0
+
+    def blit(self, scr: Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+
+    def update(self, scr: Screen):
+        self.rct.centerx += self.vx
+        if self.rct.centerx <= 0 or self.rct.centerx >= scr.rct.width:
+            self.vx *= -1
+        self.blit(scr)
+
+
 class Attack(pg.sprite.Sprite):
     def __init__(self, img, speed):
         pg.sprite.Sprite.__init__(self)
@@ -111,24 +130,6 @@ class Guard:
             self.rct.centerx = bird.rct.centerx
             self.rct.centery = bird.rct.centery
             self.blit(scr)
-
-
-class Monster:
-    def __init__(self, img, hp, position):
-        self.sfc = pg.image.load(img)
-        self.sfc = pg.transform.rotozoom(self.sfc, 0, 0.5)
-        self.rct = self.sfc.get_rect()
-        self.rct.center = position
-        self.vx, self.vy = 1, 0
-
-    def blit(self, scr: Screen):
-        scr.sfc.blit(self.sfc, self.rct)
-
-    def update(self, scr: Screen):
-        self.rct.centerx += self.vx
-        if self.rct.centerx <= 0 or self.rct.centerx >= scr.rct.width:
-            self.vx *= -1
-        self.blit(scr)
 
 
 class Timer():
@@ -192,10 +193,10 @@ def main():
                 return
 
         kkt.update(scr)
-        atk.update(scr)
         shield.update(scr, kkt)
         monster.update(scr)
         timer.update(scr)
+        atk.update(scr)
 
         bkd.update(scr)
         bkd2.update(scr)
@@ -203,6 +204,8 @@ def main():
         if kkt.rct.colliderect(bkd.rct) or kkt.rct.colliderect(bkd2.rct):
             if not guard_status:
                 return
+        if monster.rct.colliderect(atk.rct):
+            return
 
         pg.display.update()
         clock.tick(1000)
