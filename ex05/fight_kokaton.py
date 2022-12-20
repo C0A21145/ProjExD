@@ -172,12 +172,12 @@ def main():
     global guard_status
 
     scr = Screen("逃げろ！こうかとん", (1600, 900), "fig/pg_bg.jpg")
-    kkt = Bird("fig/6.png", 2.0, (900, 400))
+    kkt = Bird("fig/6.png", 2.0, (900, 700))
     bkd = Bomb((255, 0, 0), 15, (+1, +1), scr)
     bkd2 = Bomb((255, 0, 0), 15, (+1, +1), scr)
     atk = Attack("fig/ball.png", 1)
     shield = Guard("fig/shield.png")
-    monster = Monster("fig/monster.png", 1, (500, 500))
+    monster = Monster("fig/monster.png", 1, (800, 400))
     timer = Timer(30, scr)
 
     clock = pg.time.Clock()
