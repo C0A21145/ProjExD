@@ -4,6 +4,7 @@ import sys
 import time
 import math
 # ----------------------------------------------------------------
+# シールドの真偽値
 guard_status = False
 
 
@@ -171,13 +172,20 @@ def check_bound(obj_rct, scr_rct):
 def main():
     global guard_status
 
+    # スクリーンの生成
     scr = Screen("逃げろ！こうかとん", (1600, 900), "fig/pg_bg.jpg")
+    # こうかとんの生成
     kkt = Bird("fig/6.png", 2.0, (900, 700))
+    # 爆弾x2の表示
     bkd = Bomb((255, 0, 0), 15, (+1, +1), scr)
     bkd2 = Bomb((255, 0, 0), 15, (+1, +1), scr)
+    # 攻撃ボールの表示(デフォルトは非表示)
     atk = Attack("fig/ball.png", 1)
+    # シールドの表示(デフォルトは非表示)
     shield = Guard("fig/shield.png")
+    # モンスターの表示
     monster = Monster("fig/monster.png", 1, (800, 400))
+    # タイマーの表示
     timer = Timer(30, scr)
 
     clock = pg.time.Clock()
@@ -196,12 +204,12 @@ def main():
             if event.type == pg.QUIT:
                 return
 
+        # それぞれ更新
         kkt.update(scr)
         shield.update(scr, kkt)
         monster.update(scr)
         timer.update(scr)
         atk.update(scr)
-
         bkd.update(scr)
         bkd2.update(scr)
 
