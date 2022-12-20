@@ -88,6 +88,8 @@ class Monster(pg.sprite.Sprite):
             self.vx *= -1
         self.blit(scr)
 
+# 攻撃クラス
+
 
 class Attack(pg.sprite.Sprite):
     def __init__(self, img, speed):
@@ -114,6 +116,8 @@ class Attack(pg.sprite.Sprite):
                 self.kill()
             self.blit(scr)
 
+# 盾クラス
+
 
 class Guard:
     global guard_status
@@ -131,6 +135,8 @@ class Guard:
             self.rct.centerx = bird.rct.centerx
             self.rct.centery = bird.rct.centery
             self.blit(scr)
+
+# タイマークラス
 
 
 class Timer():
@@ -190,9 +196,12 @@ def main():
 
     clock = pg.time.Clock()
     while True:
+        # キーが押されたらの反応
         keystate = pg.key.get_pressed()
+        # spaceキーが押されたら球を出す
         if keystate[pg.K_SPACE]:
             atk.shot(kkt, scr)
+        # zキーが押されたらシールドを作る
         if keystate[pg.K_z]:
             guard_status = True
         else:
