@@ -147,6 +147,10 @@ class Timer():
     def update(self, scr: Screen):
         deadline = self.deadline - (time.time() - self.start_time)
         txt = self.font.render(str(math.floor(deadline)), True, (0, 0, 0))
+
+        if deadline < 0:
+            return
+
         self.sfc.blit(txt, (1500, 0))
 
 
