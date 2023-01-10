@@ -27,7 +27,7 @@ V = 10
 F_RATE = 100
 
 # 経過時間
-wait_time = 0
+elapsed_time = 0
 # ----------------------------------------------------------------
 # ブロッククラス
 
@@ -40,9 +40,6 @@ class Block(pg.sprite.Sprite):
         self.x = x
         self.y = y
 
-        # ブロック画像読み込み(後で)
-        # self.img = pg.image.load(~~).convert()
-
         self.image = pg.Surface((1920, 1080))
         self.image.set_colorkey((0, 0, 0))
         pg.draw.rect(self.image, (0, 128, 0), (self.x, self.y, 120, 40))
@@ -51,6 +48,8 @@ class Block(pg.sprite.Sprite):
 
     def update(self):
         pass
+
+# 落とし穴クラス
 
 
 class Hole(pg.sprite.Sprite):
@@ -61,9 +60,6 @@ class Hole(pg.sprite.Sprite):
         self.x = x
         self.y = y
 
-        # ブロック画像読み込み(後で)
-        # self.img = pg.image.load(~~).convert()
-
         self.image = pg.Surface((120, 240))
         self.image.set_colorkey((0, 0, 0))
         pg.draw.rect(self.image, (0, 0, 0),
@@ -72,6 +68,8 @@ class Hole(pg.sprite.Sprite):
 
     def update(self):
         pass
+
+# プレイヤークラス
 
 
 class Player():
@@ -87,9 +85,13 @@ class Player():
     def blit(self):
         self.player_sfc.blit(self.player_sfc, self.player_rct)
 
+# --------------------------------------------------------
+
 
 def main():
-    global box_index, wait_time
+    # グローバル変数の設定
+    global box_index, elapsed_time
+
     # 初期設定
     pg.display.set_caption("走るゲーム")
     scrn_width = 1920
@@ -114,19 +116,21 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
+
         # 時間
         clock = pg.time.Clock()
 
-        # 無限ループ処理
+        # 地面の無限ループ処理
         blocks = pg.sprite.Group()
         for i in range(17):
             if map_info[(box_index+i) % 160] == 0:
-                blocks.add(Hole(wait_time+120*i, 840))
+                blocks.add(Hole(elapsed_time+120*i, 840))
             elif map_info[(box_index+i) % 160] == 1:
-                blocks.add(Block(wait_time+120*i, 840))
+                blocks.add(Block(elapsed_time+120*i, 840))
 
+        # 参照する要素番号と経過時間の更新
         box_index += 1
-        wait_time += 1
+        elapsed_time += 1
 
         # フレームレート設定
         clock.tick(F_RATE)
@@ -140,11 +144,11 @@ def main():
         pg.display.update()
         blocks.update()
 
+        # 処理が速すぎるので一時停止
         time.sleep(0.3)
 
+        # 終了処理
         for event in pg.event.get():
-
-            # 終了処理
             if event.type == pg.QUIT:
                 exit()
             if event.type == pg.KEYDOWN:
